@@ -41,12 +41,11 @@ class Things {
     
 
 
-What All This Supports (subject to change)
+What All This Supports (subject to change, resp. not all is validated)
 ----------------------
 
 * `QueryParam`-annotated parameters of type `Seq[String]`, `List[String]`,
   `Vector[String]`, `IndexedSeq[String]`, `Set[String]`, and `Option[String]`.
-* `AST.JValue` request and response entities.
 * `JsonNode` request and response entities.
 * Case class (i.e., `Product` instances) JSON request and response entities.
 * `Array[A]` request and response entities. (Due to the JVM's type erasure and
