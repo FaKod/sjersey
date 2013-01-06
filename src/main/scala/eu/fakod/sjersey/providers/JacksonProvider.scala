@@ -56,9 +56,9 @@ trait DeAndSerializer {
 @Provider
 @Produces(Array(MediaType.APPLICATION_JSON))
 @Consumes(Array(MediaType.APPLICATION_JSON))
-class JerksonProvider[A] extends AbstractMessageReaderWriterProvider[A] with DeAndSerializer {
+class JacksonProvider[A] extends AbstractMessageReaderWriterProvider[A] with DeAndSerializer {
 
-  private val logger = LoggerFactory.getLogger(classOf[JerksonProvider[_]])
+  private val logger = LoggerFactory.getLogger(classOf[JacksonProvider[_]])
 
   lazy val module = DefaultScalaModule
 

@@ -1,13 +1,13 @@
 package eu.fakod.sjersey.providers.specs
 
 import javax.ws.rs.core.MediaType
-import eu.fakod.sjersey.providers.JerksonProvider
+import eu.fakod.sjersey.providers.JacksonProvider
 import javax.ws.rs.WebApplicationException
 import java.io.{ByteArrayOutputStream, ByteArrayInputStream}
 import eu.fakod.sjersey.SJerseyTestBase
 
-class JerksonProviderSpec extends SJerseyTestBase {
-  private val provider = new JerksonProvider[Array[Int]]
+class JacksonProviderSpec extends SJerseyTestBase {
+  private val provider = new JacksonProvider[Array[Int]]
 
   "An array of ints" should {
     "is writable" in {
