@@ -6,13 +6,11 @@ SJersey
 SJersey is a set of classes which add Scala interoperation to Jersey.
 
 
-Requirements
-------------
+##Versions:
 
-* Scala 2.9.2
-* jackson-module-scala 2.1.3
-* Jersey 1.9.1
-* Slf4j API 1.6.2
+### sjersey_2.10 0.3.3
+* bumped to Scala 2.10.3 and deployed to Central
+* bumped versions for jersey-server and jackson-module-scala
 
 
 How To Use
@@ -23,8 +21,8 @@ How To Use
 ```xml
 <dependency>
     <groupId>eu.fakod</groupId>
-    <artifactId>sjersey${scala.version}</artifactId>
-    <version>0.1.0</version>
+    <artifactId>sjersey_2.10</artifactId>
+    <version>0.3.3</version>
 </dependency>
 ```
 
