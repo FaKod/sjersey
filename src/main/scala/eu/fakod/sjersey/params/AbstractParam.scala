@@ -11,7 +11,7 @@ abstract class AbstractParam[A](val input: String) {
   val value: A = try {
     parse(input)
   } catch {
-    case e => throw new WebApplicationException(onError(input, e))
+    case e: Throwable => throw new WebApplicationException(onError(input, e))
   }
 
   /**
