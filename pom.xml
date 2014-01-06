@@ -10,7 +10,7 @@
 
     <groupId>eu.fakod</groupId>
     <artifactId>sjersey_2.10</artifactId>
-    <version>0.3.2-SNAPSHOT</version>
+    <version>0.3.2</version>
     <packaging>jar</packaging>
     <url>https://github.com/FaKod/sjersey</url>
 
