@@ -6,6 +6,7 @@ import org.mockito.invocation.InvocationOnMock
 import org.hamcrest.Matcher
 import scala.util.matching.Regex
 import org.mockito.{ArgumentCaptor, InOrder, Matchers => MockitoMatchers, Mockito}
+import scala.language.implicitConversions
 
 trait Mocks {
   /**

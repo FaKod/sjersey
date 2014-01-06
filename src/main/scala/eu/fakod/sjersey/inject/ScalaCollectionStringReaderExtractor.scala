@@ -4,6 +4,7 @@ import scala.collection.JavaConversions._
 import javax.ws.rs.core.MultivaluedMap
 import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 import scala.collection.generic.GenericCompanion
+import scala.language.higherKinds
 
 /**
  * Given a parameter name, a possibly-null default value, and a collection
