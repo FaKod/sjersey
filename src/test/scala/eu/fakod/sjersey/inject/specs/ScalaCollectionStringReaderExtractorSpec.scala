@@ -1,8 +1,8 @@
 package eu.fakod.sjersey.inject.specs
 
 import eu.fakod.sjersey.inject.ScalaCollectionStringReaderExtractor
-import com.sun.jersey.core.util.MultivaluedMapImpl
 import eu.fakod.sjersey.SJerseyTestBase
+import org.glassfish.jersey.internal.util.collection.MultivaluedStringMap
 
 class ScalaCollectionStringReaderExtractorSpec extends SJerseyTestBase {
   "Extracting a parameter" should {
@@ -13,11 +13,11 @@ class ScalaCollectionStringReaderExtractorSpec extends SJerseyTestBase {
     }
 
     "has a default value" in {
-      extractor.getDefaultStringValue must be_==("default")
+      extractor.getDefaultValueString must be_==("default")
     }
 
     "extracts a set of parameter values" in {
-      val params = new MultivaluedMapImpl()
+      val params = new MultivaluedStringMap()
       params.add("name", "one")
       params.add("name", "two")
       params.add("name", "three")
@@ -27,7 +27,7 @@ class ScalaCollectionStringReaderExtractorSpec extends SJerseyTestBase {
     }
 
     "uses the default value if no parameter exists" in {
-      val params = new MultivaluedMapImpl()
+      val params = new MultivaluedStringMap()
 
       val result = extractor.extract(params).asInstanceOf[Set[String]]
       result must be_==(Set("default"))
@@ -38,7 +38,7 @@ class ScalaCollectionStringReaderExtractorSpec extends SJerseyTestBase {
     val extractor = new ScalaCollectionStringReaderExtractor[Set]("name", null, Set)
 
     "returns an empty collection" in {
-      val params = new MultivaluedMapImpl()
+      val params = new MultivaluedStringMap()
 
       val result = extractor.extract(params).asInstanceOf[Set[String]]
       result must be_==(Set.empty[String])

@@ -1,7 +1,6 @@
 package eu.fakod.sjersey.providers
 
 import javax.ws.rs.ext.Provider
-import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider
 import java.lang.reflect.{Type}
 import java.lang.annotation.Annotation
 import java.io.{IOException, InputStream, OutputStream}
@@ -12,6 +11,7 @@ import javax.ws.rs.core.Response.Status
 import scala.reflect.Manifest
 import com.fasterxml.jackson.core.JsonParseException
 import eu.fakod.sjersey.util.JacksonDeAndSerializer
+import org.glassfish.jersey.message.internal.AbstractMessageReaderWriterProvider
 
 
 @Provider

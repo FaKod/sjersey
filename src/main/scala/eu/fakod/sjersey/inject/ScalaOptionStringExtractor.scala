@@ -1,7 +1,7 @@
 package eu.fakod.sjersey.inject
 
 import javax.ws.rs.core.MultivaluedMap
-import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
+import org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractor
 
 /**
  * Given a parameter name and a possibly-null default value, attempts to extract
@@ -10,11 +10,13 @@ import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParamet
  * exists, returns None.
  */
 class ScalaOptionStringExtractor(parameter: String, defaultValue: String)
-        extends MultivaluedParameterExtractor {
+  extends MultivaluedParameterExtractor[Option[String]] {
   private val default = Option(defaultValue)
 
   def getName = parameter
-  def getDefaultStringValue = defaultValue
+
+  def getDefaultValueString = defaultValue
+
   def extract(parameters: MultivaluedMap[String, String]) =
     Option(parameters.getFirst(parameter)).orElse(default)
 }

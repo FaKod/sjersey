@@ -2,9 +2,9 @@ package eu.fakod.sjersey.inject
 
 import scala.collection.JavaConversions._
 import javax.ws.rs.core.MultivaluedMap
-import com.sun.jersey.server.impl.model.parameter.multivalued.MultivaluedParameterExtractor
 import scala.collection.generic.GenericCompanion
 import scala.language.higherKinds
+import org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractor
 
 /**
  * Given a parameter name, a possibly-null default value, and a collection
@@ -12,13 +12,15 @@ import scala.language.higherKinds
  * collection instance. If defaultValue is null and no parameter exists, returns
  * an empty collection.
  */
-class ScalaCollectionStringReaderExtractor[+CC[X] <: Traversable[X]](parameter: String,
+class ScalaCollectionStringReaderExtractor[CC[X] <: Traversable[X]](parameter: String,
                                                                      defaultValue: String,
                                                                      companion: GenericCompanion[CC])
-        extends MultivaluedParameterExtractor {
+  extends MultivaluedParameterExtractor[CC[String]] {
 
   def getName = parameter
-  def getDefaultStringValue = defaultValue
+
+  def getDefaultValueString = defaultValue
+
   def extract(parameters: MultivaluedMap[String, String]) = {
     val builder = companion.newBuilder[String]
     val params = parameters.get(parameter)

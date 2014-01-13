@@ -1,8 +1,8 @@
 package eu.fakod.sjersey.inject.specs
 
-import com.sun.jersey.core.util.MultivaluedMapImpl
 import eu.fakod.sjersey.inject.ScalaOptionStringExtractor
 import eu.fakod.sjersey.SJerseyTestBase
+import org.glassfish.jersey.internal.util.collection.MultivaluedStringMap
 
 class ScalaOptionStringExtractorSpec extends SJerseyTestBase {
   "Extracting a parameter" should {
@@ -13,11 +13,11 @@ class ScalaOptionStringExtractorSpec extends SJerseyTestBase {
     }
 
     "has a default value" in {
-      extractor.getDefaultStringValue.must(be("default"))
+      extractor.getDefaultValueString.must(be("default"))
     }
 
     "extracts the first of a set of parameter values" in {
-      val params = new MultivaluedMapImpl()
+      val params = new MultivaluedStringMap()
       params.add("name", "one")
       params.add("name", "two")
       params.add("name", "three")
@@ -27,7 +27,7 @@ class ScalaOptionStringExtractorSpec extends SJerseyTestBase {
     }
 
     "uses the default value if no parameter exists" in {
-      val params = new MultivaluedMapImpl()
+      val params = new MultivaluedStringMap()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
       result must be_==(Some("default"))
@@ -38,7 +38,7 @@ class ScalaOptionStringExtractorSpec extends SJerseyTestBase {
     val extractor = new ScalaOptionStringExtractor("name", null)
 
     "returns None" in {
-      val params = new MultivaluedMapImpl()
+      val params = new MultivaluedStringMap()
 
       val result = extractor.extract(params).asInstanceOf[Option[String]]
       result must be_==(None)
