@@ -69,6 +69,19 @@
         </dependency>
 
         <dependency>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-servlet</artifactId>
+            <version>${jersey-server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.6.2</version>
@@ -137,6 +150,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
+                <version>2.2</version>
                 <executions>
                     <execution>
                         <!--
@@ -152,12 +166,21 @@
                             <webXml>
                                 src/test/webapp/WEB-INF/web.xml
                             </webXml>
+
                         </configuration>
-                        <!--configuration>
-                            ...
-                        </configuration-->
                     </execution>
                 </executions>
+                <configuration>
+                    <webResources>
+                        <resource>
+                            <directory>target/test-classes</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <includes>
+                                <include>**/*.class</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
             </plugin>
 
             <plugin>

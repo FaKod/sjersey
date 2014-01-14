@@ -5,17 +5,17 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          version="2.5">
 
-    <!--listener>
-        <listener-class>com.holidaycheck.product.core.snippetservice.MongoConnectionListener</listener-class>
-    </listener-->
+    <listener>
+        <listener-class>eu.fakod.sjersey.util.RegisterInjection</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>sjersey-service</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 
         <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.holidaycheck.product.core.snippetservice.resource;eu.fakod.sjersey.providers</param-value>
+            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-value>eu.fakod.sjersey.integration.spec;eu.fakod.sjersey.providers</param-value>
         </init-param>
     </servlet>
 
