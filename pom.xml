@@ -153,10 +153,6 @@
                 <version>2.2</version>
                 <executions>
                     <execution>
-                        <!--
-                          When also running maven-jar-plugin correct maven-war-plugin's ID
-                          from "default-war" to "default-jar"
-                        -->
                         <id>default-jar</id>
                         <phase>package</phase>
                         <goals>

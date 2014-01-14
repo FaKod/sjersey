@@ -8,7 +8,7 @@ import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.core.{JsonParser, JsonGenerator}
 
 /**
- *
+ * uses jackson-module-scala to de- and serialize Json
  */
 trait JacksonDeAndSerializer {
 
