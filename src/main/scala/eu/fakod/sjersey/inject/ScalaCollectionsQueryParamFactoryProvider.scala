@@ -4,12 +4,11 @@ import javax.ws.rs.QueryParam
 import org.glassfish.jersey.server.model.Parameter
 import org.glassfish.jersey.server.internal.inject._
 import org.glassfish.jersey.server.ParamException
-import org.glassfish.hk2.api.{InjectionResolver, TypeLiteral, Factory, ServiceLocator}
+import org.glassfish.hk2.api.{InjectionResolver, TypeLiteral, ServiceLocator}
 import eu.fakod.sjersey.inject.ScalaCollectionsQueryParamFactoryProvider.QueryParamValueFactory
 import org.glassfish.hk2.utilities.binding.AbstractBinder
 import org.glassfish.jersey.server.spi.internal.ValueFactoryProvider
 import javax.inject.{Inject, Singleton}
-import javax.ws.rs.ext.Provider
 
 /**
  * Object as "container" for former static Java classes
@@ -40,19 +39,13 @@ object ScalaCollectionsQueryParamFactoryProvider {
 class ScalaCollectionsQueryParamFactoryProvider @Inject()(mpep: MultivaluedParameterExtractorProvider, locator: ServiceLocator)
   extends AbstractValueFactoryProvider(mpep, locator, Parameter.Source.QUERY) {
 
-  def createValueFactory(parameter: Parameter): AbstractContainerRequestValueFactory[_] = {
-    val parameterName = parameter.getSourceName
-    if (parameterName == null || parameterName.length() == 0) {
-      return null
+  def createValueFactory(parameter: Parameter): AbstractContainerRequestValueFactory[_] =
+    parameter.getSourceName match {
+      case parameterName if parameterName != null && parameterName.length() != 0 =>
+        Option(buildExtractor(parameterName, parameter.getDefaultValue, parameter.getRawType)).
+          map(new QueryParamValueFactory(_, !parameter.isEncoded)).orNull
+      case _ => null
     }
-
-    val e = buildExtractor(parameterName, parameter.getDefaultValue, parameter.getRawType)
-    if (e == null) {
-      return null
-    }
-
-    new QueryParamValueFactory(e, !parameter.isEncoded)
-  }
 
   private def buildExtractor(name: String, default: String, klass: Class[_]): MultivaluedParameterExtractor[_] = {
     if (klass == classOf[Seq[String]]) {

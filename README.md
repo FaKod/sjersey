@@ -8,6 +8,10 @@ SJersey is a set of classes which add Scala interoperation to Jersey.
 
 ##Versions:
 
+### sjersey_2.10 0.4.0
+* bumped Jersey Version to 2.5.1
+* bumped jackson-module-scala to 2.3.1
+
 ### sjersey_2.10 0.3.3
 * bumped to Scala 2.10.3 and deployed to Central
 * bumped versions for jersey-server and jackson-module-scala
