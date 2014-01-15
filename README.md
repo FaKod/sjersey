@@ -4,6 +4,8 @@ SJersey
 *Life's too short to use `java.util.Collection`*
 
 SJersey is a set of classes which add Scala interoperation to Jersey.
+It is intended to be a replacement for jersey-scala.
+Instead of Jerkson, jackson-module-scala (Jackson JSON) is used now.
 
 
 ##Versions:
@@ -26,18 +28,25 @@ How To Use
 <dependency>
     <groupId>eu.fakod</groupId>
     <artifactId>sjersey_2.10</artifactId>
-    <version>0.3.3</version>
+    <version>0.4.0</version>
 </dependency>
 ```
 
 **Second**, write your resource classes:
 
 ```scala
+case class FooCC(s: String, i: Int, d: Double, b: Boolean)
+case class BarCC(s: String, i: Int)
+
 @Path("/things")
-@Produces("text/plain")
+@Consumes(Array("application/json"))
+@Produces(Array("application/json"))
 class Things {
   @GET
   def getAThing(@QueryParam("name") names: Set[String]) = "I found: " + names.mkString(", ")
+  
+  @POST
+  def postAThing(cc: FooCC) = BarCC("received", cc.i)
 }
 ```
     
