@@ -32,7 +32,28 @@ How To Use
 </dependency>
 ```
 
-**Second**, write your resource classes:
+**Second**, configure the servlet (in case of using one):
+
+```xml
+
+<servlet>
+    <servlet-name>sjersey-service</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+
+    <init-param>
+        <param-name>javax.ws.rs.Application</param-name>
+        <param-value>eu.fakod.sjersey.util.RegisterParameterInjectionBinder</param-value>
+    </init-param>
+
+    <init-param>
+        <param-name>jersey.config.server.provider.packages</param-name>
+        <param-value>my.resources.package;eu.fakod.sjersey.providers</param-value>
+    </init-param>
+</servlet>
+
+```
+
+**Third**, write your resource classes:
 
 ```scala
 case class FooCC(s: String, i: Int, d: Double, b: Boolean)
