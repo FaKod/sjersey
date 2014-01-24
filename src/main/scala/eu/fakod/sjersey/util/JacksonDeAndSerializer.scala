@@ -3,7 +3,6 @@ package eu.fakod.sjersey.util
 import com.fasterxml.jackson.databind.{MappingJsonFactory, ObjectMapper, Module}
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 import java.io.{OutputStream, InputStream}
-import java.lang.reflect.{ParameterizedType, Type}
 import com.fasterxml.jackson.core.`type`.TypeReference
 import com.fasterxml.jackson.core.{JsonParser, JsonGenerator}
 
