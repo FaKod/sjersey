@@ -146,7 +146,7 @@
                 <executions>
                     <execution>
                         <id>default-jar</id>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>war</goal>
                         </goals>
@@ -154,7 +154,6 @@
                             <webXml>
                                 src/test/webapp/WEB-INF/web.xml
                             </webXml>
-
                         </configuration>
                     </execution>
                 </executions>
