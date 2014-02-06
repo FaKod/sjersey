@@ -10,8 +10,9 @@ Instead of Jerkson, jackson-module-scala (Jackson JSON) is used now.
 
 ##Versions:
 
-### sjersey_2.10 0.4.1-SNAPSHOT
+### sjersey_2.10 0.4.1
 * Removed unneeded code from trait JacksonDeAndSerializer
+* WAR was deployed to Nexus as JAR
 
 ### sjersey_2.10 0.4.0
 * bumped Jersey Version to 2.5.1
