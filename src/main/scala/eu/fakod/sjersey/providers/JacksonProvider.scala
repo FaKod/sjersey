@@ -1,5 +1,6 @@
 package eu.fakod.sjersey.providers
 
+import com.fasterxml.jackson.databind.JsonMappingException
 import javax.ws.rs.ext.Provider
 import java.lang.reflect.{Type}
 import java.lang.annotation.Annotation
@@ -30,7 +31,7 @@ class JacksonProvider[A] extends AbstractMessageReaderWriterProvider[A] with Jac
     try {
       deserialize(entityStream)(Manifest.classType(klass))
     } catch {
-      case e: JsonParseException => {
+      case e @ (_: JsonParseException | _: JsonMappingException) => {
         throw new WebApplicationException(Response.status(Status.BAD_REQUEST)
           .entity(e.getMessage)
           .build)

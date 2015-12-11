@@ -1,18 +1,24 @@
 package eu.fakod.sjersey.integration.spec
 
 import eu.fakod.sjersey.SJerseyTestBase
-import javax.ws.rs.client.{Entity, ClientBuilder}
+import eu.fakod.sjersey.providers.JacksonProvider
 import javax.ws.rs._
+import javax.ws.rs.client.{ClientBuilder, Entity}
 import javax.ws.rs.core.MediaType
 import org.glassfish.jersey.client.ClientConfig
-import eu.fakod.sjersey.providers.JacksonProvider
-
+import org.specs2.execute.{AsResult, Result, ResultExecution, Success}
+import scala.util.Properties
 
 case class SjerseyTest(s: String, i: Int, d: Double, b: Boolean)
 
 
 class SJerseyIntegrationSpec extends SJerseyTestBase {
 
+  implicit def unitAsResult = new AsResult[Unit] {
+    override def asResult(r: => Unit): Result = ResultExecution.execute(r)(_ => Success())
+  }
+
+  val scalaShortVersion = Properties.versionNumberString.replaceAll("\\.[0-9]+$", "")
 
   "A Scala collection query param injectable with decoding" should {
 
@@ -21,7 +27,7 @@ class SJerseyIntegrationSpec extends SJerseyTestBase {
       List("set", "list", "vector", "seq", "indexedset").foreach {
         settype =>
           val client = ClientBuilder.newClient
-          val target = client.target("http://localhost:8080").path("sjersey_2.10/testresource/" + settype).
+          val target = client.target("http://localhost:8080").path(s"sjersey_$scalaShortVersion/testresource/" + settype).
             queryParam("name", "1").queryParam("name", "2")
           val resp = target.request().get[String](classOf[String])
           resp must be_==("1, 2")
@@ -37,7 +43,7 @@ class SJerseyIntegrationSpec extends SJerseyTestBase {
       clientConfig.register(classOf[JacksonProvider[_]])
 
       val client = ClientBuilder.newClient(clientConfig)
-      val target = client.target("http://localhost:8080").path("sjersey_2.10/testresource/")
+      val target = client.target("http://localhost:8080").path(s"sjersey_$scalaShortVersion/testresource/")
 
       val cc = SjerseyTest("1", 1, 2, true)
       val resp = target.request().post[SjerseyTest](Entity.entity(cc, MediaType.APPLICATION_JSON), classOf[SjerseyTest])

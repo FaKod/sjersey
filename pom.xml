@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>eu.fakod</groupId>
-    <artifactId>sjersey_2.10</artifactId>
+    <artifactId>sjersey_${scala.version.short}</artifactId>
     <version>0.4.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://github.com/FaKod/sjersey</url>
@@ -17,11 +17,32 @@
     <name>Jersey Support for Scala ${scala.version}</name>
 
     <properties>
-        <scala.version>2.10.3</scala.version>
-        <scala.version.short>2.10</scala.version.short>
-        <jackson-module-scala.version>2.3.1</jackson-module-scala.version>
-        <jersey-server.version>2.5.1</jersey-server.version>
+        <scala210.version>2.10.3</scala210.version>
+        <scala211.version>2.11.7</scala211.version>
+        <specs2.version>2.3.13</specs2.version>
+        <jackson-module-scala.version>2.5.1</jackson-module-scala.version>
+        <jersey-server.version>2.21</jersey-server.version>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>scala-2.11</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <scala.version>${scala211.version}</scala.version>
+                <scala.version.short>2.11</scala.version.short>
+            </properties>
+        </profile>
+        <profile>
+            <id>scala-2.10</id>
+            <properties>
+                <scala.version>${scala210.version}</scala.version>
+                <scala.version.short>2.10</scala.version.short>
+            </properties>
+        </profile>
+    </profiles>
 
     <licenses>
         <license>
@@ -96,7 +117,7 @@
         <dependency>
             <groupId>org.specs2</groupId>
             <artifactId>specs2_${scala.version.short}</artifactId>
-            <version>1.14</version>
+            <version>${specs2.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -173,7 +194,7 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.2</version>
                 <configuration>
                     <recompileMode>incremental</recompileMode>
                     <args>
@@ -213,7 +234,7 @@
                         <plugin>
                             <groupId>net.alchim31.maven</groupId>
                             <artifactId>scala-maven-plugin</artifactId>
-                            <version>3.1.6</version>
+                            <version>3.2.2</version>
                             <configuration>
                                 <jvmArgs>
                                     <jvmArg>-Xms64m</jvmArg>

@@ -1,6 +1,7 @@
 package eu.fakod.sjersey.inject
 
 import javax.ws.rs.QueryParam
+import org.glassfish.jersey.internal.inject.ExtractorException
 import org.glassfish.jersey.server.model.Parameter
 import org.glassfish.jersey.server.internal.inject._
 import org.glassfish.jersey.server.ParamException
