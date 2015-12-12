@@ -10,6 +10,12 @@ Instead of Jerkson, jackson-module-scala (Jackson JSON) is used now.
 
 ##Versions:
 
+### sjersey_2.10 & sjersey_2.11 0.4.2
+* Build for both Scala 2.10 and 2.11.
+* Bumped Jersey to 2.21
+* Bumped jackson-modile-scala to 2.5.1
+* Added extractor support for `@HeaderParam` and `@FormParam`
+
 ### sjersey_2.10 0.4.1
 * Removed unneeded code from trait JacksonDeAndSerializer
 * Fix: a WAR was deployed to Maven Central instead of the JAR
@@ -31,10 +37,13 @@ How To Use
 ```xml
 <dependency>
     <groupId>eu.fakod</groupId>
-    <artifactId>sjersey_2.10</artifactId>
-    <version>0.4.0</version>
+    <artifactId>sjersey_${scala.version.short}</artifactId>
+    <version>0.4.2</version>
 </dependency>
 ```
+
+Currently valid values for `${scala.verion.short}` are `2.10` and
+`2.11`.
 
 **Second**, configure the servlet (in case of using one):
 
@@ -80,8 +89,9 @@ class Things {
 What All This Supports (subject to change, resp. not all is validated)
 ----------------------
 
-* `QueryParam`-annotated parameters of type `Seq[String]`, `List[String]`,
-  `Vector[String]`, `IndexedSeq[String]`, `Set[String]`, and `Option[String]`.
+* `QueryParam`-, `HeaderParam`-, and `FormParam`-annotated parameters of type
+  `Seq[String]`, `List[String]`, `Vector[String]`, `IndexedSeq[String]`,
+  `Set[String]`, and `Option[String]`.
 * `JsonNode` request and response entities.
 * Case class (i.e., `Product` instances) JSON request and response entities.
 * `Array[A]` request and response entities. (Due to the JVM's type erasure and
