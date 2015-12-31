@@ -12,7 +12,7 @@ import scala.util.Properties
 case class SjerseyTest(s: String, i: Int, d: Double, b: Boolean)
 
 
-class SJerseyIntegrationSpec extends SJerseyTestBase {
+/*class SJerseyIntegrationSpec extends SJerseyTestBase {
 
   implicit def unitAsResult = new AsResult[Unit] {
     override def asResult(r: => Unit): Result = ResultExecution.execute(r)(_ => Success())
@@ -50,7 +50,7 @@ class SJerseyIntegrationSpec extends SJerseyTestBase {
       resp must be_==(SjerseyTest("1received", 2, 3, false))
     }
   }
-}
+}*/
 
 
 @Path("/testresource")
