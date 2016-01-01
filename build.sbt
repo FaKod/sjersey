@@ -25,7 +25,7 @@ libraryDependencies += "junit" %% "junit" % "4.7" % "test" cross CrossVersion.Di
 
 
 
-enablePlugins(TomcatPlugin)
+//enablePlugins(TomcatPlugin)
 
 sourceDirectory in webappPrepare := (sourceDirectory in Test).value / "WebContent"
 
