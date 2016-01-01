@@ -18,7 +18,9 @@ import org.glassfish.jersey.server.spi.internal.ValueFactoryProvider
 object ScalaCollectionsFactoryProvider {
 
   class QueryParamInjectionResolver extends ParamInjectionResolver[QueryParam](classOf[ScalaCollectionsQueryParamFactoryProvider]) {}
+
   class HeaderParamInjectionResolver extends ParamInjectionResolver[HeaderParam](classOf[ScalaCollectionsHeaderParamFactoryProvider]) {}
+
   class FormParamInjectionResolver extends ParamInjectionResolver[FormParam](classOf[ScalaCollectionsFormParamFactoryProvider]) {}
 
   class QueryParamValueFactory(extractor: MultivaluedParameterExtractor[_], decode: Boolean)
@@ -33,8 +35,7 @@ object ScalaCollectionsFactoryProvider {
   }
 
   class FormParamValueFactory(extractor: MultivaluedParameterExtractor[_])
-    extends AbstractContainerRequestValueFactory[AnyRef]
-  {
+    extends AbstractContainerRequestValueFactory[AnyRef] {
     override def provide(): AnyRef = try {
       getContainerRequest.bufferEntity()
       val form = getContainerRequest.readEntity(classOf[Form])
@@ -46,8 +47,7 @@ object ScalaCollectionsFactoryProvider {
   }
 
   class HeaderParamValueFactory(extractor: MultivaluedParameterExtractor[_])
-    extends AbstractContainerRequestValueFactory[AnyRef]
-  {
+    extends AbstractContainerRequestValueFactory[AnyRef] {
     override def provide(): AnyRef = try {
       extractor.extract(getContainerRequest.getHeaders).asInstanceOf[AnyRef]
     } catch {
@@ -55,13 +55,13 @@ object ScalaCollectionsFactoryProvider {
         throw new ParamException.HeaderParamException(e.getCause, extractor.getName, extractor.getDefaultValueString)
     }
   }
+
 }
 
 /**
  * A parameter value factory provider that provides parameter value factories
- * which are using {@link MultivaluedParameterExtractorProvider} to extract parameter
- * values from the supplied {@link javax.ws.rs.core.MultivaluedMap multivalued
- * parameter map}.
+ * which are using MultivaluedParameterExtractorProvider to extract parameter
+ * values from the supplied MultivaluedMap multivalued parameter map.
  **/
 class ScalaCollectionsFactoryProvider @Inject()(mpep: MultivaluedParameterExtractorProvider,
                                                 locator: ServiceLocator,
@@ -120,12 +120,12 @@ class ParameterInjectionBinder extends AbstractBinder {
 
     bind(classOf[ScalaCollectionsFactoryProvider.QueryParamInjectionResolver]).
       to(new TypeLiteral[InjectionResolver[QueryParam]]() {
-    }).in(classOf[Singleton])
+      }).in(classOf[Singleton])
     bind(classOf[ScalaCollectionsFactoryProvider.HeaderParamInjectionResolver]).
       to(new TypeLiteral[InjectionResolver[HeaderParam]]() {
-    }).in(classOf[Singleton])
+      }).in(classOf[Singleton])
     bind(classOf[ScalaCollectionsFactoryProvider.FormParamInjectionResolver]).
       to(new TypeLiteral[InjectionResolver[FormParam]]() {
-    }).in(classOf[Singleton])
+      }).in(classOf[Singleton])
   }
 }
