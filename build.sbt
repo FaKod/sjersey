@@ -1,6 +1,6 @@
 name := "sjersey"
 
-version := "0.4.3-SNAPSHOT"
+version := "0.4.3"
 
 organization := "eu.fakod"
 
