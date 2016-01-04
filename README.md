@@ -13,7 +13,7 @@ Instead of Jerkson, jackson-module-scala (Jackson JSON) is used now.
 ### sjersey_2.10 & sjersey_2.11 0.4.3
 * Build for both Scala 2.10 and 2.11.
 * Bumped Jersey to 2.21
-* Bumped jackson-modile-scala to 2.5.1
+* Bumped jackson-module-scala to 2.5.1
 * Added extractor support for `@HeaderParam` and `@FormParam`
 * thanks to @kelnos for this
 
